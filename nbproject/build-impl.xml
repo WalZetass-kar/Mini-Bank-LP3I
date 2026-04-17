@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+*** GENERATED FROM project.xml - DO NOT EDIT  ***
+***         EDIT ../build.xml INSTEAD         ***
+-->
+<project name="MiniBankLP3IPekanbaru-impl" default="default" basedir="..">
+    <fail message="Please build using Ant 1.8.0 or higher.">
+        <condition>
+            <not>
+                <antversion atleast="1.8.0"/>
+            </not>
+        </condition>
+    </fail>
+    
+    <target name="default" depends="jar" description="Build whole project."/>
+    
+    <target name="init">
+        <property name="build.dir" value="build"/>
+        <property name="build.classes.dir" value="${build.dir}/classes"/>
+        <property name="dist.dir" value="dist"/>
+        <property name="dist.jar" value="${dist.dir}/MiniBankLP3IPekanbaru.jar"/>
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${build.classes.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+    </target>
+    
+    <target name="compile" depends="init">
+        <javac srcdir="." destdir="${build.classes.dir}" 
+               includeantruntime="false" source="11" target="11">
+            <classpath>
+                <pathelement location="sqlite-jdbc-3.42.0.0.jar"/>
+            </classpath>
+            <include name="MiniBankApp/**/*.java"/>
+            <include name="main/**/*.java"/>
+        </javac>
+    </target>
+    
+    <target name="jar" depends="compile">
+        <jar destfile="${dist.jar}" basedir="${build.classes.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="main.Main"/>
+                <attribute name="Class-Path" value="sqlite-jdbc-3.42.0.0.jar"/>
+            </manifest>
+        </jar>
+        <copy file="sqlite-jdbc-3.42.0.0.jar" todir="${dist.dir}"/>
+        <copy file="bank.db" todir="${dist.dir}" failonerror="false"/>
+    </target>
+    
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+</project>

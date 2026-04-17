@@ -1,0 +1,310 @@
+Mini Bank LP3I Pekanbaru - Project Structure
+===========================================
+
+.
+├── MiniBankApp/                          # Source Code Directory
+│   ├── main/                             # Entry Point
+│   │   └── Main.java                     # Main class to run application
+│   │
+│   ├── model/                            # Data Models (4 files)
+│   │   ├── User.java                     # User data model
+│   │   ├── Account.java                  # Account data model
+│   │   ├── Card.java                     # Card data model
+│   │   └── Transaction.java              # Transaction data model
+│   │
+│   ├── view/                             # GUI Views (9 files)
+│   │   ├── LoginView.java                # Login screen
+│   │   ├── RegisterView.java             # Registration screen
+│   │   ├── CreateCardView.java           # Card creation screen
+│   │   ├── DashboardView.java            # Main dashboard
+│   │   ├── WithdrawView.java             # Withdraw money screen
+│   │   ├── DepositView.java              # Deposit money screen
+│   │   ├── TransferView.java             # Transfer money screen
+│   │   ├── TransactionHistoryView.java   # Transaction history screen
+│   │   └── CardInfoView.java             # Card information screen
+│   │
+│   ├── controller/                       # Business Logic (4 files)
+│   │   ├── AuthController.java           # Authentication logic
+│   │   ├── AccountController.java        # Account management logic
+│   │   ├── TransactionController.java    # Transaction logic
+│   │   └── CardController.java           # Card management logic
+│   │
+│   ├── repository/                       # Database Operations (4 files)
+│   │   ├── UserRepository.java           # User CRUD operations
+│   │   ├── AccountRepository.java        # Account CRUD operations
+│   │   ├── CardRepository.java           # Card CRUD operations
+│   │   └── TransactionRepository.java    # Transaction CRUD operations
+│   │
+│   ├── database/                         # Database Management (2 files)
+│   │   ├── DatabaseConnection.java       # SQLite connection manager
+│   │   └── DatabaseInitializer.java      # Database initialization
+│   │
+│   └── utils/                            # Utility Helpers (2 files)
+│       ├── GeneratorUtil.java            # Generate account, card, PIN
+│       └── ValidationUtil.java           # Input validation
+│
+├── Documentation/                        # Complete Documentation (11 files)
+│   ├── INDEX.md                          # Documentation index
+│   ├── README.md                         # Main documentation
+│   ├── QUICK_START.md                    # Quick start guide (5 minutes)
+│   ├── CARA_MENJALANKAN.md               # Installation guide (Indonesian)
+│   ├── CONTOH_PENGGUNAAN.md              # Usage examples & scenarios
+│   ├── FITUR_DAN_VALIDASI.md             # Features & validation details
+│   ├── FAQ.md                            # Frequently asked questions
+│   ├── STRUKTUR_PROJECT.md               # Project structure & MVC
+│   ├── DATABASE_SCHEMA.md                # Database schema & ERD
+│   ├── PROJECT_SUMMARY.md                # Complete project summary
+│   └── CHANGELOG.md                      # Version history
+│
+├── Scripts/                              # Build & Run Scripts (4 files)
+│   ├── run.sh                            # Run script for Linux/Mac
+│   ├── run.bat                           # Run script for Windows
+│   ├── compile.sh                        # Compile script for Linux/Mac
+│   └── compile.bat                       # Compile script for Windows
+│
+├── Configuration/                        # Configuration Files (2 files)
+│   ├── .gitignore                        # Git ignore file
+│   └── LICENSE                           # MIT License
+│
+├── Dependencies/                         # External Libraries
+│   └── sqlite-jdbc-3.42.0.0.jar          # SQLite JDBC driver
+│
+└── Generated Files/                      # Auto-generated (runtime)
+    ├── bank.db                           # SQLite database file
+    └── *.class                           # Compiled Java classes
+
+===========================================
+Project Statistics
+===========================================
+
+Source Code:
+  - Java Files: 26 files
+  - Total Lines: ~3,500+ lines
+  - Classes: 26 classes
+  - Methods: ~150+ methods
+
+Documentation:
+  - Markdown Files: 11 files
+  - Total Pages: ~100+ pages
+  - Total Words: ~15,000+ words
+
+Scripts:
+  - Shell Scripts: 2 files (Linux/Mac)
+  - Batch Scripts: 2 files (Windows)
+
+Total Files: 44 files
+
+===========================================
+MVC Architecture Breakdown
+===========================================
+
+Model Layer (4 classes):
+  └── Data structure with encapsulation
+      ├── User.java
+      ├── Account.java
+      ├── Card.java
+      └── Transaction.java
+
+View Layer (9 classes):
+  └── GUI presentation with Java Swing
+      ├── LoginView.java
+      ├── RegisterView.java
+      ├── CreateCardView.java
+      ├── DashboardView.java
+      ├── WithdrawView.java
+      ├── DepositView.java
+      ├── TransferView.java
+      ├── TransactionHistoryView.java
+      └── CardInfoView.java
+
+Controller Layer (4 classes):
+  └── Business logic and validation
+      ├── AuthController.java
+      ├── AccountController.java
+      ├── TransactionController.java
+      └── CardController.java
+
+Repository Layer (4 classes):
+  └── Database operations (CRUD)
+      ├── UserRepository.java
+      ├── AccountRepository.java
+      ├── CardRepository.java
+      └── TransactionRepository.java
+
+Database Layer (2 classes):
+  └── Connection and initialization
+      ├── DatabaseConnection.java
+      └── DatabaseInitializer.java
+
+Utils Layer (2 classes):
+  └── Helper functions
+      ├── GeneratorUtil.java
+      └── ValidationUtil.java
+
+===========================================
+Database Schema
+===========================================
+
+users
+  ├── id (PK)
+  ├── nama
+  ├── nik (UNIQUE)
+  ├── tanggal_lahir
+  ├── alamat
+  ├── no_hp
+  └── created_at
+
+accounts
+  ├── id (PK)
+  ├── user_id (FK → users.id)
+  ├── no_rekening (UNIQUE)
+  ├── saldo
+  └── created_at
+
+cards
+  ├── id (PK)
+  ├── account_id (FK → accounts.id)
+  ├── no_kartu (UNIQUE)
+  ├── pin
+  ├── status (AKTIF/BLOKIR/EXPIRED)
+  ├── expired_date
+  └── wrong_pin_counter
+
+transactions
+  ├── id (PK)
+  ├── account_id (FK → accounts.id)
+  ├── type (WITHDRAW/DEPOSIT/TRANSFER)
+  ├── amount
+  ├── description
+  └── date
+
+===========================================
+Features
+===========================================
+
+✅ User Management
+   ├── Registration with validation
+   ├── Auto-create account (Rp 50.000)
+   └── NIK & phone validation
+
+✅ Card Management
+   ├── Auto-generate card number (16 digit)
+   ├── Auto-generate PIN (6 digit)
+   ├── Card status management
+   └── Expiry date (+5 years)
+
+✅ Authentication & Security
+   ├── Login with card & PIN
+   ├── PIN validation
+   ├── Auto-block after 3 wrong attempts
+   └── Card expiry check
+
+✅ Banking Transactions
+   ├── Check balance
+   ├── Withdraw (multiple of 50k)
+   ├── Deposit
+   ├── Transfer between accounts
+   └── Transaction validation
+
+✅ Transaction History
+   ├── View all transactions
+   ├── Sort by date
+   └── Display in table
+
+✅ Card Information
+   ├── View card details
+   ├── Check status
+   └── Check expiry
+
+===========================================
+Quick Start
+===========================================
+
+1. Download SQLite JDBC Driver:
+   wget https://github.com/xerial/sqlite-jdbc/releases/download/3.42.0.0/sqlite-jdbc-3.42.0.0.jar
+
+2. Run Application:
+   Linux/Mac: ./run.sh
+   Windows:   run.bat
+
+3. Register & Login:
+   - Click "Registrasi"
+   - Fill the form
+   - Create ATM card
+   - Login with card number & PIN
+
+4. Start Banking:
+   - Check balance
+   - Deposit/Withdraw
+   - Transfer
+   - View history
+
+===========================================
+Documentation Guide
+===========================================
+
+Start Here:
+  1. INDEX.md          - Documentation index
+  2. QUICK_START.md    - 5-minute quick start
+  3. README.md         - Overview
+
+User Guide:
+  4. CARA_MENJALANKAN.md    - Installation guide
+  5. CONTOH_PENGGUNAAN.md   - Usage examples
+  6. FAQ.md                 - Common questions
+
+Technical:
+  7. STRUKTUR_PROJECT.md    - MVC architecture
+  8. DATABASE_SCHEMA.md     - Database schema
+  9. FITUR_DAN_VALIDASI.md  - Features detail
+  10. PROJECT_SUMMARY.md    - Complete summary
+
+===========================================
+Technology Stack
+===========================================
+
+Language:       Java 8+
+GUI:            Java Swing
+Database:       SQLite 3.x
+JDBC:           sqlite-jdbc-3.42.0.0.jar
+Architecture:   MVC (Model-View-Controller)
+Paradigm:       Object Oriented Programming
+Platform:       Desktop Standalone
+
+===========================================
+Learning Objectives
+===========================================
+
+✅ Java Programming
+✅ Object Oriented Programming (OOP)
+✅ MVC Architecture
+✅ Database Integration (SQLite + JDBC)
+✅ GUI Development (Java Swing)
+✅ Input Validation
+✅ Error Handling
+✅ Security Basics
+✅ Best Practices
+
+===========================================
+Status
+===========================================
+
+Development:  ✅ COMPLETE
+Testing:      ✅ MANUAL TESTED
+Documentation:✅ COMPLETE
+Status:       ✅ READY TO USE
+
+Version:      1.0.0
+Release Date: April 15, 2026
+License:      MIT License
+
+===========================================
+
+Mini Bank LP3I Pekanbaru
+Banking System Application
+Educational Project
+
+For complete documentation, see INDEX.md
+For quick start, see QUICK_START.md
+
+Happy Learning! 🚀
